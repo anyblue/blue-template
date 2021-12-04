@@ -9,6 +9,14 @@ import copy from 'rollup-plugin-copy';
 
 export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? '/blue-template/' : '/',
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+        math: 'always'
+      }
+    },
+  },
   plugins: [
     vue(),
     copy({
@@ -24,6 +32,14 @@ export default defineConfig({
       name: 'blue',
       formats: ['es', 'cjs', 'umd', 'iife'],
       fileName: (format: string) => `blue.${format}.js`
+    },
+    rollupOptions: {
+      external: ['vue'],
+      output: {
+        globals: {
+          'vue': 'Vue'
+        }
+      }
     }
-  }
+  },
 });
