@@ -6,6 +6,7 @@ import {defineConfig} from 'vite';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
 import copy from 'rollup-plugin-copy';
+import eslint from 'vite-plugin-eslint';
 
 export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? '/blue-template/' : '/',
@@ -19,6 +20,20 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    eslint({
+      cache: false,
+      fix: false,
+      include: [
+        "src/**/*.ts",
+        "src/**/*.d.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue",
+        "lib/**/*.ts",
+        "lib/**/*.d.ts",
+        "lib/**/*.tsx",
+        "lib/**/*.vue"
+      ]
+    }),
     copy({
       targets: [
         {src: 'lib/index.html', dest: 'dist'}

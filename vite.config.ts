@@ -1,5 +1,6 @@
 import {defineConfig} from 'vite';
 import vue from '@vitejs/plugin-vue';
+import eslint from 'vite-plugin-eslint';
 
 export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? '/blue-template/' : '/',
@@ -11,5 +12,22 @@ export default defineConfig({
       }
     },
   },
-  plugins: [vue()]
+  plugins: [
+    vue(),
+    eslint({
+      cache: false,
+      fix: false,
+      // eslint范围与ts一致
+      include: [
+        "src/**/*.ts",
+        "src/**/*.d.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue",
+        "lib/**/*.ts",
+        "lib/**/*.d.ts",
+        "lib/**/*.tsx",
+        "lib/**/*.vue"
+      ]
+    })
+  ]
 });
