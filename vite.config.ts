@@ -2,8 +2,8 @@ import {defineConfig} from 'vite';
 import vue from '@vitejs/plugin-vue';
 import eslint from 'vite-plugin-eslint';
 
-export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/blue-template/' : '/',
+export default defineConfig(({mode}) => ({
+  base: mode === 'production' ? '/blue-template/' : '/',
   css: {
     preprocessorOptions: {
       less: {
@@ -30,4 +30,4 @@ export default defineConfig({
       ]
     })
   ]
-});
+}));

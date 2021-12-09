@@ -8,8 +8,8 @@ import path from 'path';
 import copy from 'rollup-plugin-copy';
 import eslint from 'vite-plugin-eslint';
 
-export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/blue-template/' : '/',
+export default defineConfig(({mode}) => ({
+  base: mode === 'lib' ? '/blue-template/' : '/',
   css: {
     preprocessorOptions: {
       less: {
@@ -57,4 +57,4 @@ export default defineConfig({
       }
     }
   },
-});
+}));
